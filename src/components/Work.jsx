@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projects } from "../constants";
 import ImageWithFallback from "./ImageWithFallback";
 
@@ -12,6 +12,31 @@ const Work = () => {
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleCloseModal();
+    }
+  };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && selectedProject) {
+        handleCloseModal();
+      }
+    };
+
+    if (selectedProject) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
 
   return (
     <section
@@ -69,8 +94,22 @@ const Work = () => {
 
       {/* Modal Container */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4">
-          <div className="bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl w-[95%] max-w-5xl overflow-hidden relative max-h-[95vh] border border-gray-700">
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4" 
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0,
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          onClick={handleBackdropClick}
+        >
+          <div className="bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl w-[95%] max-w-5xl overflow-hidden relative max-h-[95vh] border border-gray-700" style={{ zIndex: 10000 }}>
             {/* Modal Header */}
             <div className="flex justify-between items-center p-6 border-b border-gray-700">
               <h2 className="text-xl font-semibold text-white">Project Details</h2>
@@ -84,7 +123,7 @@ const Work = () => {
             </div>
 
             {/* Modal Content */}
-            <div className="flex flex-col lg:flex-row max-h-[calc(95vh-120px)]">
+            <div className="flex flex-col lg:flex-row" style={{ maxHeight: 'calc(95vh - 120px)' }}>
               {/* Image Section */}
               <div className="lg:w-1/2 w-full p-6 lg:p-8">
                 <div className="relative w-full h-full flex items-center justify-center">
