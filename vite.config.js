@@ -21,7 +21,8 @@ export default defineConfig({
         },
       },
     },
-    assetsInlineLimit: 4096,
+    // Optimize image inlining for better mobile performance
+    assetsInlineLimit: 8192, // Increased from 4096 for better caching
   },
   server: {
     port: 3000,
@@ -29,5 +30,11 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
+  },
+  // Add image optimization
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
+  // Optimize for mobile
+  define: {
+    __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
   },
 })

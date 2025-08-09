@@ -5,7 +5,7 @@ import javascriptLogo from './assets/tech_logo/javascript.png';
 import reactjsLogo from './assets/tech_logo/reactjs.png';
 import tailwindcssLogo from './assets/tech_logo/tailwindcss.png';
 import materialuiLogo from './assets/tech_logo/materialui.png';
-import bootstrapLogo from './assets/tech_logo/bootstrap.png';
+
 import springbootLogo from './assets/tech_logo/springboot.png';
 import mysqlLogo from './assets/tech_logo/mysql.png';
 import javaLogo from './assets/tech_logo/java.png';
@@ -17,14 +17,9 @@ import postmanLogo from './assets/tech_logo/postman.png';
 import vercelLogo from './assets/tech_logo/vercel.png';
 import apiLogo from './assets/tech_logo/Apilogo.png';
 import wordpressLogo from './assets/tech_logo/wordpress.png';
-import numpyLogo from './assets/tech_logo/numpy.png';
-import pandasLogo from './assets/tech_logo/pandas.png';
+import numpyLogo from './assets/tech_logo/numpy.png'; 
+import pandasLogo from './assets/tech_logo/pandas.png'; 
 import matplotlibLogo from './assets/tech_logo/matplotlib.png';
-// import reduxLogo from './assets/tech_logo/redux.png';
-// import nextjsLogo from './assets/tech_logo/nextjs.png';
-// import nodejsLogo from './assets/tech_logo/nodejs.png';
-// import expressjsLogo from './assets/tech_logo/express.png';
-// import mongodbLogo from './assets/tech_logo/mongodb.png';
 
 // Experience Section Logo's
 import appzeto from './assets/company_logo/appzeto.png';
@@ -61,9 +56,9 @@ export const SkillsInfo = [
       { name: 'Tailwind CSS', logo: tailwindcssLogo },
       { name: 'Material UI', logo: materialuiLogo },
       { name: 'WordPress', logo: wordpressLogo },
-      { name: 'NumPy', logo: numpyLogo },
-      { name: 'Pandas', logo: pandasLogo },
-      { name: 'Matplotlib', logo: matplotlibLogo },
+      { name: 'NumPy', logo: numpyLogo }, // Logo not available
+      { name: 'Pandas', logo: pandasLogo }, // Logo not available
+      { name: 'Matplotlib', logo: matplotlibLogo }, // Logo not available
     ],
   },
   {
@@ -71,12 +66,7 @@ export const SkillsInfo = [
     skills: [
       { name: 'Springboot', logo: springbootLogo },
       { name: 'Rest API', logo: apiLogo },
-      // { name: 'Node JS', logo: nodejsLogo },
-      // { name: 'Express JS', logo: expressjsLogo },
       { name: 'MySQL', logo: mysqlLogo },
-      // { name: 'MongoDB', logo: mongodbLogo },
-      // { name: 'Firebase', logo: firebaseLogo },
-      // { name: 'PostgreSQL', logo: postgreLogo },
     ],
   },
   {

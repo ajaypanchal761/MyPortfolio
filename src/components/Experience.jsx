@@ -17,7 +17,7 @@ const Experience = () => {
       {/* Experience Timeline */}
       <div className="relative">
         {/* Vertical line */}
-        <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 sm:-translate-x-0 w-1 bg-white h-full"></div>
+        <div className="absolute sm:left-1/2 left-4 transform -translate-x-1/2 sm:-translate-x-0 w-1 bg-white h-full"></div>
 
         {/* Experience Entries */}
         {experiences.map((experience, index) => (
@@ -27,12 +27,13 @@ const Experience = () => {
               index % 2 === 0 ? "sm:justify-end" : "sm:justify-start"
             }`}
           >
-            {/* Timeline Circle - Hidden on desktop */}
-            <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 bg-gray-400 border-4 border-[#8245ec] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex justify-center items-center z-10 lg:hidden">
+            {/* Timeline Circle - Mobile optimized */}
+            <div className="absolute sm:left-1/2 left-4 transform -translate-x-1/2 sm:-translate-x-0 bg-gray-400 border-4 border-[#8245ec] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex justify-center items-center z-10 lg:hidden shadow-lg overflow-hidden">
               <ImageWithFallback
                 src={experience.img}
                 alt={experience.company}
-                className="w-full h-full rounded-full"
+                className="w-full h-full rounded-full object-cover"
+                fallbackSrc={null}
               />
             </div>
 
@@ -40,42 +41,42 @@ const Experience = () => {
             <div
               className={`w-full sm:max-w-md lg:max-w-2xl p-4 sm:p-8 rounded-2xl shadow-2xl border border-white bg-gray-900 backdrop-blur-md shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] ${
                 index % 2 === 0 ? "sm:ml-0" : "sm:mr-0"
-              } sm:ml-44 sm:mr-44 ml-8 lg:ml-0 lg:mr-0 transform transition-transform duration-300 hover:scale-105`}
+              } sm:ml-44 sm:mr-44 ml-16 lg:ml-0 lg:mr-0 transform transition-transform duration-300 hover:scale-105`}
             >
               {/* Flex container for image and text */}
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4 sm:space-x-6">
                 {/* Company Logo/Image */}
-                <div className="w-16 h-16 bg-white rounded-md overflow-hidden">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-md overflow-hidden flex-shrink-0">
                   <ImageWithFallback
                     src={experience.img}
                     alt={experience.company}
-                    className="w-full h-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* Role, Company Name, and Date */}
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-col justify-between flex-1 min-w-0">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white truncate">
                       {experience.role}
                     </h3>
-                    <h4 className="text-md sm:text-sm text-gray-300">
+                    <h4 className="text-sm sm:text-md text-gray-300 truncate">
                       {experience.company}
                     </h4>
                   </div>
                   {/* Date at the bottom */}
-                  <p className="text-sm text-gray-500 mt-2">{experience.date}</p>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-2">{experience.date}</p>
                 </div>
               </div>
 
-              <p className="mt-4 text-gray-400">{experience.desc}</p>
+              <p className="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">{experience.desc}</p>
               <div className="mt-4">
-                <h5 className="font-medium text-white">Skills:</h5>
-                <ul className="flex flex-wrap mt-2">
+                <h5 className="font-medium text-white text-sm sm:text-base">Skills:</h5>
+                <ul className="flex flex-wrap mt-2 gap-2">
                   {experience.skills.map((skill, index) => (
                     <li
                       key={index}
-                      className="bg-[#8245ec] text-gray-300 px-4 py-1 text-xs sm:text-sm rounded-lg mr-2 mb-2 border border-gray-400"
+                      className="bg-[#8245ec] text-gray-300 px-2 sm:px-4 py-1 text-xs rounded-lg border border-gray-400 whitespace-nowrap"
                     >
                       {skill}
                     </li>

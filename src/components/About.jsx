@@ -73,9 +73,32 @@ const About = () => {
           
         </div>
         {/* Right Side */}
-        <div className="md:w- flex justify-center md:justify-end md:pl-10">
+        <div className="md:w-1/2 flex justify-center md:justify-end md:pl-10">
           {isMobile ? (
-            <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full">
+            <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full relative">
+              <img
+                src={profileImage}
+                alt="Ajay Panchal"
+                className={`w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)] ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                } transition-opacity duration-500`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+                </div>
+              )}
+              {imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                  <div className="text-white text-center">
+                    <div className="text-4xl mb-2">👤</div>
+                    <div className="text-sm">Image not available</div>
+                  </div>
+                </div>
+              )}
+            </div>
           ) : (
             <Tilt
               className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full"
@@ -86,32 +109,28 @@ const About = () => {
               transitionSpeed={1000}
               gyroscope={true}
             >
-          )}
-            <img
-              src={profileImage}
-              alt="Ajay Panchal"
-              className={`w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)] ${
-                imageLoaded ? 'opacity-100' : 'opacity-0'
-              } transition-opacity duration-500`}
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageError(true)}
-            />
-            {!imageLoaded && !imageError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
-              </div>
-            )}
-            {imageError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
-                <div className="text-white text-center">
-                  <div className="text-4xl mb-2">👤</div>
-                  <div className="text-sm">Image not available</div>
+              <img
+                src={profileImage}
+                alt="Ajay Panchal"
+                className={`w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)] ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                } transition-opacity duration-500`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
                 </div>
-              </div>
-            )}
-          {isMobile ? (
-            </div>
-          ) : (
+              )}
+              {imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                  <div className="text-white text-center">
+                    <div className="text-4xl mb-2">👤</div>
+                    <div className="text-sm">Image not available</div>
+                  </div>
+                </div>
+              )}
             </Tilt>
           )}
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageWithFallback from "./ImageWithFallback";
+import PropTypes from 'prop-types';
 
 const CertificateModal = ({ isOpen, onClose, certificate }) => {
   const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
@@ -145,6 +146,25 @@ const CertificateModal = ({ isOpen, onClose, certificate }) => {
       </div>
     </div>
   );
+};
+
+CertificateModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  certificate: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    issuer: PropTypes.string,
+    platform: PropTypes.string,
+    imageUrl: PropTypes.string,
+    skills: PropTypes.arrayOf(PropTypes.string),
+    year: PropTypes.string,
+    multipleCertificates: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      imageUrl: PropTypes.string,
+      description: PropTypes.string
+    }))
+  })
 };
 
 export default CertificateModal;

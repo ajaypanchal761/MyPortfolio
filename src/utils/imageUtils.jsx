@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // Image utility functions for better handling of problematic images
 
 // List of known problematic images that might need special handling
@@ -45,3 +47,81 @@ export const createFallbackComponent = (alt, className = "") => (
     <div className="text-xs">{alt || 'Image not available'}</div>
   </div>
 );
+
+// Mobile-optimized image loading hook
+export const useImageLoader = (src, options = {}) => {
+  const { priority = false, fallbackSrc = null } = options;
+  
+  const [state, setState] = useState({
+    loading: true,
+    error: false,
+    loaded: false,
+    src: src
+  });
+
+  useEffect(() => {
+    if (!src) {
+      setState({ loading: false, error: true, loaded: false, src: null });
+      return;
+    }
+
+    setState(prev => ({ ...prev, loading: true, error: false }));
+
+    const img = new Image();
+    
+    // Optimize for mobile
+    img.decoding = 'async';
+    img.loading = priority ? 'eager' : 'lazy';
+    
+    img.onload = () => {
+      setState({
+        loading: false,
+        error: false,
+        loaded: true,
+        src: src
+      });
+    };
+
+    img.onerror = () => {
+      if (fallbackSrc && src !== fallbackSrc) {
+        // Try fallback
+        img.src = fallbackSrc;
+      } else {
+        setState({
+          loading: false,
+          error: true,
+          loaded: false,
+          src: src
+        });
+      }
+    };
+
+    img.src = src;
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [src, fallbackSrc, priority]);
+
+  return state;
+};
+
+// Optimize image dimensions for mobile
+export const getOptimizedImageDimensions = (originalWidth, originalHeight, maxWidth = 300) => {
+  if (originalWidth <= maxWidth) {
+    return { width: originalWidth, height: originalHeight };
+  }
+  
+  const ratio = originalHeight / originalWidth;
+  const newWidth = maxWidth;
+  const newHeight = Math.round(maxWidth * ratio);
+  
+  return { width: newWidth, height: newHeight };
+};
+
+// Create responsive image srcset for mobile optimization
+export const createResponsiveSrcSet = (src, sizes = [300, 600, 900]) => {
+  // This is a placeholder - in a real implementation, you'd generate different sized images
+  return sizes.map(size => `${src} ${size}w`).join(', ');
+};
