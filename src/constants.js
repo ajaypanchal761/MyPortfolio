@@ -175,14 +175,14 @@ export const SkillsInfo = [
     {
       id: 1,
       title: "QR Code Attendance System With DataBase",
-      description:"The QR Code Attendance System with Database is a web-based application designed with separate modules for admins and students, ensuring secure and efficient attendance management. The system features robust authentication with dedicated sign-up and sign-in processes for both user types. Admins can easily manage student records, generate unique QR codes for marking attendance, and monitor attendance data in real time. Students can conveniently scan QR codes to mark their presence, view detailed attendance history, and update personal profile information. Backed by a strong and optimized database, the system ensures fast, accurate, and reliable data handling and retrieval, making it an effective solution for modern attendance tracking.",
+      description:"The QR Code Attendance System with Database is a web-based application designed with separate modules for admin and students, ensure secure and efficient attendance management. The system features dedicated sign-up and sign-in processes for both user types. Admins can easily manage student records, generate unique QR codes for marking attendance, and monitor attendance data in real time. Students can conveniently scan QR codes to mark their presence, view detailed attendance history, and update personal profile information. Backed by a strong and optimized database, the system ensures fast, accurate, and reliable data handling and retrieval.",
       image: qrcodeLogo,
       tags: ["HTML5", "CSS3", "JavaScript", "JAVA", "SQL", "JSP", "Servlets"]
     },
     {
       id: 2,
       title: "Online Banking System with Database",
-      description:"The Online Banking System with Database is a secure, database-driven web application designed with separate Admin and Customer modules for efficient account and transaction management. The Admin module provides comprehensive control, including customer onboarding, account management, deposits, withdrawals, balance checks, and fund transfers. The Customer module allows users to view and manage their accounts, transfer funds, check balances, and update profile details, all with secure session handling to protect sensitive data. Backed by a robust database, the system ensures accurate transaction processing and reliable data retrieval, delivering a smooth and secure online banking experience.",
+      description:"The Online Banking System with Database is a secure, database-driven web application designed with separate Admin and Customer modules for efficient account and transaction management. The Admin module provides comprehensive control, including customer onboarding, account management, deposits, withdrawals, balance checks, and fund transfers. The Customer module allows users to view and manage their accounts, transfer funds, check balances, and update profile details, all with secure session handling to protect sensitive data. Backed by a robust database, the system ensures accurate transaction processing and data retrieval.",
       image: onlinebankingLogo,
       tags: ["HTML5", "CSS3", "JavaScript", "JAVA", "SQL", "JSP", "Servlets"]
     },
