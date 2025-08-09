@@ -2,6 +2,7 @@ import { useState } from "react";
 import { certifications } from "../constants";
 import Tilt from "react-parallax-tilt";
 import CertificateModal from "./CertificateModal";
+import ImageWithFallback from "./ImageWithFallback";
 
 const Certification = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);

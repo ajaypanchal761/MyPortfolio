@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { projects } from "../constants";
+import ImageWithFallback from "./ImageWithFallback";
 
 const Work = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -36,10 +37,10 @@ const Work = () => {
             className="border border-white bg-gray-900 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden cursor-pointer hover:shadow-purple-500/50 hover:-translate-y-2 transition-transform duration-300"
           >
             <div className="p-4">
-              <img
+              <ImageWithFallback
                 src={project.image}
                 alt={project.title}
-                className="w-full h-48 object-cover rounded-xl"
+                className="w-full h-48 rounded-xl"
               />
             </div>
             <div className="p-6">
@@ -79,10 +80,10 @@ const Work = () => {
 
             <div className="flex flex-col">
               <div className="w-full flex justify-center bg-gray-900 px-4">
-                <img
+                <ImageWithFallback
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="lg:w-full w-[95%] object-contain rounded-xl shadow-2xl"
+                  className="lg:w-full w-[95%] rounded-xl shadow-2xl"
                 />
               </div>
               <div className="lg:p-8 p-6">

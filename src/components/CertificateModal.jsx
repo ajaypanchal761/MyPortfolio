@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import ImageWithFallback from "./ImageWithFallback";
 
 const CertificateModal = ({ isOpen, onClose, certificate }) => {
   const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
@@ -104,7 +105,7 @@ const CertificateModal = ({ isOpen, onClose, certificate }) => {
           <div className="max-w-full max-h-[70vh] overflow-auto">
             {hasMultipleCertificates ? (
               <div className="text-center">
-                <img
+                <ImageWithFallback
                   src={currentCert.imageUrl}
                   alt={`${currentCert.title} Certificate`}
                   className="w-full h-auto rounded-lg shadow-lg"
@@ -115,7 +116,7 @@ const CertificateModal = ({ isOpen, onClose, certificate }) => {
                 </p>
               </div>
             ) : (
-              <img
+              <ImageWithFallback
                 src={certificate.imageUrl}
                 alt={`${certificate.title} Certificate`}
                 className="w-full h-auto rounded-lg shadow-lg"

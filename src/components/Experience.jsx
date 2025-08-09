@@ -1,4 +1,5 @@
 import { experiences } from "../constants"; // Import your data
+import ImageWithFallback from "./ImageWithFallback";
 
 const Experience = () => {
   return (
@@ -28,10 +29,10 @@ const Experience = () => {
           >
             {/* Timeline Circle - Hidden on desktop */}
             <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 bg-gray-400 border-4 border-[#8245ec] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex justify-center items-center z-10 lg:hidden">
-              <img
+              <ImageWithFallback
                 src={experience.img}
                 alt={experience.company}
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full rounded-full"
               />
             </div>
 
@@ -45,10 +46,10 @@ const Experience = () => {
               <div className="flex items-center space-x-6">
                 {/* Company Logo/Image */}
                 <div className="w-16 h-16 bg-white rounded-md overflow-hidden">
-                  <img
+                  <ImageWithFallback
                     src={experience.img}
                     alt={experience.company}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
                   />
                 </div>
 

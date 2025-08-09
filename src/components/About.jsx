@@ -1,10 +1,21 @@
 import ReactTypingEffect from 'react-typing-effect';
 import Tilt from 'react-parallax-tilt';
+import { useState, useEffect } from 'react';
 // Import your profile image here - replace 'profile2.png' with your image filename
 import profileImage from '../assets/myprofile.jpeg';
 import resumePDF from '../assets/AjayPanchalResu.pdf';
 
 const About = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageError(true);
+    img.src = profileImage;
+  }, []);
+
   return (
     <section id="about" className="py-16 px-[7vw] md:px-[8vw] lg:px-[10vw] xl:px-[15vw] font-sans -mt-16 md:mt-16 lg:mt-20">
       <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-8 lg:gap-12">
@@ -73,8 +84,25 @@ const About = () => {
             <img
               src={profileImage}
               alt="Ajay Panchal"
-              className="w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)]"
+              className={`w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)] ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              } transition-opacity duration-500`}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageError(true)}
             />
+            {!imageLoaded && !imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+              </div>
+            )}
+            {imageError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-full">
+                <div className="text-white text-center">
+                  <div className="text-4xl mb-2">👤</div>
+                  <div className="text-sm">Image not available</div>
+                </div>
+              </div>
+            )}
           </Tilt>
         </div>
       </div>
