@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { isProblematicImage, createFallbackComponent } from '../utils/imageUtils.jsx';
 
 const ImageWithFallback = ({ 
   src, 
@@ -17,11 +16,6 @@ const ImageWithFallback = ({
     setImageLoaded(false);
     setImageError(false);
     setCurrentSrc(src);
-    
-    // If this is a known problematic image, set error state immediately
-    if (isProblematicImage(src)) {
-      setImageError(true);
-    }
   }, [src]);
 
   const handleLoad = () => {
@@ -45,8 +39,13 @@ const ImageWithFallback = ({
     </div>
   );
 
-  // Default error component with better fallback
-  const defaultErrorComponent = createFallbackComponent(alt, className);
+  // Default error component
+  const defaultErrorComponent = (
+    <div className="flex items-center justify-center bg-gray-800 rounded-lg text-white text-center">
+      <div className="text-2xl mb-1">🖼️</div>
+      <div className="text-xs">Image not available</div>
+    </div>
+  );
 
   return (
     <div className={`relative ${className}`}>

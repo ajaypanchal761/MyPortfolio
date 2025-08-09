@@ -1,47 +1,36 @@
-// Image utility functions for better handling of problematic images
-
-// List of known problematic images that might need special handling
-export const PROBLEMATIC_IMAGES = {
-  'pandas': 'pandas.png',
-  'numpy': 'numpy.png', 
-  'matplotlib': 'matplotlib.png',
-  'wordpress': 'wordpress.png',
-  'api': 'Apilogo.png'
+// Utility function to handle image imports with error handling
+export const getImageUrl = (imagePath) => {
+  try {
+    // For development, use the imported image
+    if (import.meta.env.DEV) {
+      return imagePath;
+    }
+    
+    // For production, ensure the path is correct
+    return imagePath;
+  } catch (error) {
+    console.error('Error loading image:', error);
+    // Return a fallback image or placeholder
+    return '/placeholder-image.png';
+  }
 };
 
-// Fallback text for when images fail to load
-export const getFallbackText = (imageName) => {
-  const fallbacks = {
-    'pandas': '📊',
-    'numpy': '🔢',
-    'matplotlib': '📈',
-    'wordpress': '📝',
-    'api': '🔗',
-    'rest': '🔗'
-  };
-  
-  const key = imageName.toLowerCase();
-  return fallbacks[key] || '🖼️';
+// Function to preload images
+export const preloadImage = (src) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
 };
 
-// Check if an image URL is likely to be problematic
-export const isProblematicImage = (src) => {
-  if (!src) return true;
-  
-  // Check if it's a base64 data URL (might indicate inlined small image)
-  if (src.startsWith('data:')) return true;
-  
-  // Check if it's one of our known problematic PNG images
-  const fileName = src.split('/').pop().toLowerCase();
-  return Object.values(PROBLEMATIC_IMAGES).some(problematic => 
-    fileName.includes(problematic.toLowerCase()) && fileName.endsWith('.png')
-  );
+// Function to handle multiple image preloading
+export const preloadImages = async (imagePaths) => {
+  try {
+    await Promise.all(imagePaths.map(preloadImage));
+    console.log('All images preloaded successfully');
+  } catch (error) {
+    console.error('Error preloading images:', error);
+  }
 };
-
-// Generate a fallback component for problematic images
-export const createFallbackComponent = (alt, className = "") => (
-  <div className={`flex items-center justify-center bg-gray-800 rounded-lg text-white text-center ${className}`}>
-    <div className="text-2xl mb-1">{getFallbackText(alt)}</div>
-    <div className="text-xs">{alt || 'Image not available'}</div>
-  </div>
-);
