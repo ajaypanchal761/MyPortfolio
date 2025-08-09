@@ -177,7 +177,7 @@ export const SkillsInfo = [
       title: "QR Code Attendance System With DataBase",
       description:"The QR Code Attendance System with Database is a web-based application designed with separate modules for admin and students, ensure secure and efficient attendance management. The system features dedicated sign-up and sign-in processes for both user types. Admins can easily manage student records, generate unique QR codes for marking attendance, and monitor attendance data in real time. Students can conveniently scan QR codes to mark their presence, view detailed attendance history, and update personal profile information. Backed by a strong and optimized database, the system ensures fast, accurate, and reliable data handling and retrieval.",
       image: qrcodeLogo,
-      tags: ["HTML5", "CSS3", "JavaScript", "JAVA", "SQL", "JSP", "Servlets"]
+      tags: ["HTML5", "CSS3", "JavaScript", "JAVA", "SQL", "JSP", "Servlet"]
     },
     {
       id: 2,
