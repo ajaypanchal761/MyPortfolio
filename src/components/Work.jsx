@@ -69,57 +69,87 @@ const Work = () => {
 
       {/* Modal Container */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4">
-          <div className="bg-gray-900 rounded-xl shadow-2xl w-[90%] max-w-4xl overflow-hidden relative max-h-[90vh]">
-            <div className="flex justify-end p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4">
+          <div className="bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl w-[95%] max-w-5xl overflow-hidden relative max-h-[95vh] border border-gray-700">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-700">
+              <h2 className="text-xl font-semibold text-white">Project Details</h2>
               <button
                 onClick={handleCloseModal}
-                className="text-white text-3xl font-bold hover:text-purple-500 transition-colors duration-200"
+                className="text-gray-400 hover:text-white text-2xl font-bold transition-colors duration-200 p-2 hover:bg-gray-800 rounded-lg"
+                aria-label="Close modal"
               >
                 &times;
               </button>
             </div>
 
-            <div className="flex flex-col lg:flex-row">
-              <div className="lg:w-1/2 w-full flex justify-center bg-gray-900 px-4 lg:px-6">
-                <div className="relative w-full max-w-md lg:max-w-lg">
-                  <div className="relative overflow-hidden rounded-xl bg-gray-800 shadow-2xl">
+            {/* Modal Content */}
+            <div className="flex flex-col lg:flex-row max-h-[calc(95vh-120px)]">
+              {/* Image Section */}
+              <div className="lg:w-1/2 w-full p-6 lg:p-8">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="relative overflow-hidden rounded-xl bg-gray-800 shadow-2xl w-full max-w-lg">
                     <ImageWithFallback
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className="w-full h-auto max-h-[400px] min-h-[300px] object-cover"
+                      className="w-full h-auto max-h-[450px] min-h-[350px] object-cover"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-xl pointer-events-none"></div>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl pointer-events-none"></div>
                 </div>
               </div>
-              <div className="lg:w-1/2 w-full lg:p-8 p-6 overflow-y-auto">
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                  {selectedProject.title}
-                </h3>
-                <p className="text-gray-400 mb-6 text-sm lg:text-base leading-relaxed">
-                  {selectedProject.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="bg-[#251f38] text-xs font-semibold text-purple-500 rounded-full px-3 py-1"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+
+              {/* Content Section */}
+              <div className="lg:w-1/2 w-full p-6 lg:p-8 overflow-y-auto">
+                <div className="space-y-6">
+                  {/* Project Title */}
+                  <div>
+                    <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                      {selectedProject.title}
+                    </h3>
+                    <div className="w-20 h-1 bg-purple-500 rounded-full"></div>
+                  </div>
+
+                  {/* Project Description */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-purple-400 mb-3">Description</h4>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  {/* Project Tags */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-purple-400 mb-3">Technologies Used</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-[#251f38] text-sm font-semibold text-purple-400 rounded-full px-4 py-2 border border-purple-500/30"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Project Links */}
+                  {selectedProject.link && (
+                    <div className="pt-4">
+                      <a
+                        href={selectedProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25"
+                      >
+                        <span>View Project</span>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
                 </div>
-                {selectedProject.link && (
-                  <a
-                    href={selectedProject.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
-                  >
-                    View Project
-                  </a>
-                )}
               </div>
             </div>
           </div>
