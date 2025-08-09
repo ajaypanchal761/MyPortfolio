@@ -3,10 +3,12 @@ import { certifications } from "../constants";
 import Tilt from "react-parallax-tilt";
 import CertificateModal from "./CertificateModal";
 import ImageWithFallback from "./ImageWithFallback";
+import { useMobileDetection } from "../utils/deviceUtils";
 
 const Certification = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isMobile = useMobileDetection();
 
   const handleViewCertificate = (certification) => {
     setSelectedCertificate(certification);
@@ -35,15 +37,19 @@ const Certification = () => {
     {/* Certifications Grid */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
       {certifications.map((certification, index) => (
-        <Tilt
-          key={certification.id}
-          tiltMaxAngleX={15}
-          tiltMaxAngleY={15}
-          perspective={1000}
-          scale={1.02}
-          transitionSpeed={1000}
-          gyroscope={true}
-        >
+        isMobile ? (
+          <div key={certification.id}>
+        ) : (
+          <Tilt
+            key={certification.id}
+            tiltMaxAngleX={15}
+            tiltMaxAngleY={15}
+            perspective={1000}
+            scale={1.02}
+            transitionSpeed={1000}
+            gyroscope={true}
+          >
+        )}
           <div className="bg-gray-900 backdrop-blur-md p-6 rounded-2xl border border-white 
             shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] hover:shadow-[0_0_30px_2px_rgba(130,69,236,0.5)] 
             transition-all duration-300 h-full flex flex-col">
@@ -99,9 +105,13 @@ const Certification = () => {
               View Certificate
             </button>
           </div>
-        </Tilt>
-      ))}
-    </div>
+          {isMobile ? (
+            </div>
+          ) : (
+            </Tilt>
+          )}
+        ))}
+      </div>
 
     {/* Certificate Modal */}
     <CertificateModal

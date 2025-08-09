@@ -2,8 +2,12 @@
 import { SkillsInfo } from "../constants";
 import Tilt from "react-parallax-tilt";
 import ImageWithFallback from "./ImageWithFallback";
+import { useMobileDetection } from "../utils/deviceUtils";
 
-const Skills = () => (
+const Skills = () => {
+  const isMobile = useMobileDetection();
+  
+  return (
   <section
     id="skills"
     className="py-16 md:py-20 lg:py-24 px-[7vw] md:px-[8vw] lg:px-[10vw] xl:px-[15vw] font-sans bg-skills-gradient clip-path-custom"
@@ -30,15 +34,7 @@ const Skills = () => (
           </h3>
 
           {/* Skill Items - 3 per row on larger screens */}
-          <Tilt
-            key={category.title}
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            perspective={1000}
-            scale={1.05}
-            transitionSpeed={1000}
-            gyroscope={true}
-          >
+          {isMobile ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
               {category.skills.map((skill) => (
                 <div
@@ -56,11 +52,40 @@ const Skills = () => (
                 </div>
               ))}
             </div>
-          </Tilt>
+          ) : (
+            <Tilt
+              key={category.title}
+              tiltMaxAngleX={20}
+              tiltMaxAngleY={20}
+              perspective={1000}
+              scale={1.05}
+              transitionSpeed={1000}
+              gyroscope={true}
+            >
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
+                {category.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="flex items-center justify-center space-x-2 bg-transparent border-2 border-gray-700 rounded-3xl py-2 px-2 sm:py-2 sm:px-2 text-center"
+                  >
+                    <ImageWithFallback
+                      src={skill.logo}
+                      alt={`${skill.name} logo`}
+                      className="w-6 h-6 sm:w-8 sm:h-8"
+                    />
+                    <span className="text-xs sm:text-sm text-gray-300">
+                      {skill.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Tilt>
+          )}
         </div>
       ))}
     </div>
   </section>
-);
+  );
+};
 
 export default Skills;

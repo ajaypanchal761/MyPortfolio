@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 // Import your profile image here - replace 'profile2.png' with your image filename
 import profileImage from '../assets/myprofile.jpeg';
 import resumePDF from '../assets/AjayPanchalResu.pdf';
+import { useMobileDetection } from '../utils/deviceUtils';
 
 const About = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const isMobile = useMobileDetection();
 
   useEffect(() => {
     const img = new Image();
@@ -72,15 +74,19 @@ const About = () => {
         </div>
         {/* Right Side */}
         <div className="md:w- flex justify-center md:justify-end md:pl-10">
-          <Tilt
-            className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full"
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            perspective={1000}
-            scale={1.05}
-            transitionSpeed={1000}
-            gyroscope={true}
-          >
+          {isMobile ? (
+            <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full">
+          ) : (
+            <Tilt
+              className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full"
+              tiltMaxAngleX={20}
+              tiltMaxAngleY={20}
+              perspective={1000}
+              scale={1.05}
+              transitionSpeed={1000}
+              gyroscope={true}
+            >
+          )}
             <img
               src={profileImage}
               alt="Ajay Panchal"
@@ -103,7 +109,11 @@ const About = () => {
                 </div>
               </div>
             )}
-          </Tilt>
+          {isMobile ? (
+            </div>
+          ) : (
+            </Tilt>
+          )}
         </div>
       </div>
     </section>
