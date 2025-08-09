@@ -105,17 +105,27 @@ const Work = () => {
             zIndex: 9999,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            padding: '1rem'
           }}
           onClick={handleBackdropClick}
         >
-          <div className="bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl w-[95%] max-w-5xl overflow-hidden relative max-h-[95vh] border border-gray-700" style={{ zIndex: 10000 }}>
+          <div 
+            className="bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden relative border border-gray-700" 
+            style={{ 
+              zIndex: 10000,
+              width: '90%',
+              maxWidth: '1200px',
+              maxHeight: '90vh',
+              margin: '0 auto'
+            }}
+          >
             {/* Modal Header */}
-            <div className="flex justify-between items-center p-6 border-b border-gray-700">
-              <h2 className="text-xl font-semibold text-white">Project Details</h2>
+            <div className="flex justify-between items-center p-4 lg:p-6 border-b border-gray-700">
+              <h2 className="text-lg lg:text-xl font-semibold text-white">Project Details</h2>
               <button
                 onClick={handleCloseModal}
-                className="text-gray-400 hover:text-white text-2xl font-bold transition-colors duration-200 p-2 hover:bg-gray-800 rounded-lg"
+                className="text-gray-400 hover:text-white text-xl lg:text-2xl font-bold transition-colors duration-200 p-1 lg:p-2 hover:bg-gray-800 rounded-lg"
                 aria-label="Close modal"
               >
                 &times;
@@ -123,15 +133,16 @@ const Work = () => {
             </div>
 
             {/* Modal Content */}
-            <div className="flex flex-col lg:flex-row" style={{ maxHeight: 'calc(95vh - 120px)' }}>
+            <div className="flex flex-col lg:flex-row" style={{ maxHeight: 'calc(90vh - 120px)', overflow: 'hidden' }}>
               {/* Image Section */}
-              <div className="lg:w-1/2 w-full p-6 lg:p-8">
+              <div className="lg:w-1/2 w-full p-4 lg:p-6" style={{ minWidth: 0 }}>
                 <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="relative overflow-hidden rounded-xl bg-gray-800 shadow-2xl w-full max-w-lg">
+                  <div className="relative overflow-hidden rounded-xl bg-gray-800 shadow-2xl w-full" style={{ maxWidth: '100%' }}>
                     <ImageWithFallback
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className="w-full h-auto max-h-[450px] min-h-[350px] object-cover"
+                      className="w-full h-auto object-cover"
+                      style={{ maxHeight: '400px', minHeight: '300px' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-xl pointer-events-none"></div>
                   </div>
@@ -139,32 +150,32 @@ const Work = () => {
               </div>
 
               {/* Content Section */}
-              <div className="lg:w-1/2 w-full p-6 lg:p-8 overflow-y-auto">
-                <div className="space-y-6">
+              <div className="lg:w-1/2 w-full p-4 lg:p-6 overflow-y-auto" style={{ minWidth: 0 }}>
+                <div className="space-y-4">
                   {/* Project Title */}
                   <div>
-                    <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2 break-words">
                       {selectedProject.title}
                     </h3>
-                    <div className="w-20 h-1 bg-purple-500 rounded-full"></div>
+                    <div className="w-16 h-1 bg-purple-500 rounded-full"></div>
                   </div>
 
                   {/* Project Description */}
                   <div>
-                    <h4 className="text-lg font-semibold text-purple-400 mb-3">Description</h4>
-                    <p className="text-gray-300 text-base leading-relaxed">
+                    <h4 className="text-base font-semibold text-purple-400 mb-2">Description</h4>
+                    <p className="text-gray-300 text-sm lg:text-base leading-relaxed break-words">
                       {selectedProject.description}
                     </p>
                   </div>
 
                   {/* Project Tags */}
                   <div>
-                    <h4 className="text-lg font-semibold text-purple-400 mb-3">Technologies Used</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <h4 className="text-base font-semibold text-purple-400 mb-2">Technologies Used</h4>
+                    <div className="flex flex-wrap gap-1 lg:gap-2">
                       {selectedProject.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className="bg-[#251f38] text-sm font-semibold text-purple-400 rounded-full px-4 py-2 border border-purple-500/30"
+                          className="bg-[#251f38] text-xs lg:text-sm font-semibold text-purple-400 rounded-full px-2 lg:px-3 py-1 lg:py-2 border border-purple-500/30"
                         >
                           {tag}
                         </span>
@@ -174,15 +185,15 @@ const Work = () => {
 
                   {/* Project Links */}
                   {selectedProject.link && (
-                    <div className="pt-4">
+                    <div className="pt-2 lg:pt-4">
                       <a
                         href={selectedProject.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25"
+                        className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 lg:px-6 py-2 lg:py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25 text-sm lg:text-base"
                       >
                         <span>View Project</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                       </a>
