@@ -21,7 +21,7 @@ export default defineConfig({
         },
       },
     },
-    assetsInlineLimit: 4096,
+    assetsInlineLimit: 0, // Disable inlining to ensure all images are processed as separate files
   },
   server: {
     port: 3000,
